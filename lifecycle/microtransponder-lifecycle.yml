@@ -1,0 +1,53 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://www.mobia.com/ , https://www.vivistim.com/ , https://ir.mobia.com/ — searched for
+  a status page, versioning policy, deprecation policy and SLA
+note: >-
+  Mobia Medical (formerly MicroTransponder) runs no developer program, so none of the
+  usual lifecycle surfaces exist. Recorded as honest absences with the probes that
+  established them. No StatusPage or Deprecation pointer is emitted, because neither
+  exists.
+api: Mobia Medical Site REST API (WordPress)
+versioning:
+  scheme: namespace-in-path
+  current: wp/v2
+  policy_published: false
+  policy_url: null
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: No Sunset or Deprecation response header was observed on any probed endpoint.
+status_page:
+  present: false
+  url: null
+  probes:
+  - url: https://status.mobia.com/
+    status: 0
+    note: host does not resolve
+  - url: https://www.mobia.com/status/
+    status: 404
+sla:
+  published: false
+  url: null
+support:
+  url: https://www.mobia.com/contact-us/
+  status: 200
+  note: General corporate contact form; not a developer support channel.
+corporate_lifecycle:
+  renamed_from: MicroTransponder, Inc.
+  renamed_to: Mobia Medical, Inc.
+  effective: '2026-02-24'
+  evidence:
+  - url: https://www.mobia.com/news/microtransponder-announces-corporate-name-change-to-mobia-medical/
+    note: >-
+      Company press release. microtransponder.com now 301-redirects to
+      https://www.mobia.com/ (observed).
+  - url: https://microtransponder.com/
+    status: 301
+    redirects_to: https://www.mobia.com/
+  status: active

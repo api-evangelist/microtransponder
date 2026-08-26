@@ -1,0 +1,23 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.mobia.com/.well-known/oauth-authorization-server
+note: >-
+  The full published scope surface. RFC 8414 metadata served by www.mobia.com declares
+  exactly one scope. There is no scope reference page — the provider has no developer
+  documentation — so this is the complete, verbatim set and nothing was inferred.
+authorization_server: https://www.mobia.com
+protected_resource: https://www.mobia.com/wp-json/mcp/mcp-oauth-server
+flows:
+- type: authorization_code
+  authorization_url: https://www.mobia.com/oauth/authorize
+  token_url: https://www.mobia.com/oauth/token
+  pkce: S256
+scope_count: 1
+scopes:
+- name: mcp
+  description: >-
+    The single scope declared in both the authorization-server metadata
+    (scopes_supported) and the protected-resource metadata. Grants an OAuth client access
+    to the site's Model Context Protocol endpoint. No finer-grained scopes are published.
+  source: /.well-known/oauth-authorization-server
+docs: null

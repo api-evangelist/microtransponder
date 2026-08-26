@@ -64,5 +64,14 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-MicroTransponder is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+MicroTransponder, Inc. was renamed **Mobia Medical, Inc.** on 2026-02-24. It is a medical device
+company that develops the FDA-approved Vivistim Paired VNS System — an implantable vagus nerve
+stimulator paired with rehabilitation therapy to reduce upper-extremity motor deficits in chronic
+ischemic stroke survivors. It runs no developer program: no developer portal, no API documentation,
+no OpenAPI/GraphQL/gRPC/WSDL contract, no SDKs and no public source repositories. The one
+machine-readable surface on hosts it controls is the WordPress REST API behind its corporate site,
+plus an OAuth-protected Model Context Protocol endpoint the same site serves.
+
+- https://www.mobia.com/
+- https://www.vivistim.com/
+- https://ir.mobia.com/news-events/press-releases/

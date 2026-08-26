@@ -1,0 +1,80 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.mobia.com/wp-json/mcp
+status: published
+note: >-
+  Mobia Medical (formerly MicroTransponder) serves two live Model Context Protocol
+  endpoints from its corporate WordPress site. This is the WordPress MCP Adapter plugin
+  installed on the marketing site — it exposes site content and WP Abilities to an
+  authenticated agent. It is NOT a Vivistim product, device or clinical API, and the
+  company publishes no developer documentation for it. Recorded because it is a real,
+  reachable, OAuth-discoverable agent surface on a host the company controls; read the
+  scope of it accordingly.
+deployment:
+  mode: remote
+  endpoint: https://www.mobia.com/wp-json/mcp/mcp-oauth-server
+  auth: oauth
+  verified: probed
+server:
+  name: mcp-oauth-server
+  transport: http
+  url: https://www.mobia.com/wp-json/mcp/mcp-oauth-server
+  implementation: WordPress MCP Adapter (wp-json `mcp` namespace)
+  methods:
+  - POST
+  - GET
+  - DELETE
+endpoints:
+- name: mcp-oauth-server
+  url: https://www.mobia.com/wp-json/mcp/mcp-oauth-server
+  auth: oauth
+  probe:
+    method: POST
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    http_status: 401
+    response: '{"code":"mcp_unauthorized","message":"MCP authentication required.","data":{"status":401}}'
+- name: mcp-adapter-default-server
+  url: https://www.mobia.com/wp-json/mcp/mcp-adapter-default-server
+  auth: wordpress-cookie-or-application-password
+  probe:
+    method: POST
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    http_status: 401
+    response: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+authorization:
+  discovery:
+  - https://www.mobia.com/.well-known/oauth-protected-resource
+  - https://www.mobia.com/.well-known/oauth-authorization-server
+  authorization_endpoint: https://www.mobia.com/oauth/authorize
+  token_endpoint: https://www.mobia.com/oauth/token
+  revocation_endpoint: https://www.mobia.com/oauth/revoke
+  grant_types:
+  - authorization_code
+  - refresh_token
+  pkce: S256
+  scopes:
+  - mcp
+  dynamic_client_registration: client_id_metadata_document_supported
+tools: []
+tools_note: >-
+  tools/list is auth-gated (HTTP 401 on both endpoints, anonymous). No tool names,
+  descriptions or inputSchemas could be read, and none are published anywhere else —
+  there is no llms.txt and no developer documentation. The real tool set requires
+  authenticated introspection with an `mcp`-scoped OAuth token. Nothing is guessed here.
+related_surfaces:
+  wp_abilities: https://www.mobia.com/wp-json/wp-abilities/v1/abilities
+  rest_root: https://www.mobia.com/wp-json/
+x-evidence:
+  fetched: '2026-08-26'
+  probes:
+  - url: https://www.mobia.com/wp-json/mcp
+    http_status: 200
+    content_type: application/json
+  - url: https://www.mobia.com/wp-json/mcp/mcp-oauth-server
+    http_status: 401
+  - url: https://www.mobia.com/wp-json/mcp/mcp-adapter-default-server
+    http_status: 401
+  - url: https://www.mobia.com/.well-known/oauth-protected-resource
+    http_status: 200
+  - url: https://www.mobia.com/.well-known/oauth-authorization-server
+    http_status: 200

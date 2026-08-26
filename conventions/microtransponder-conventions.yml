@@ -1,0 +1,135 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  discovery/microtransponder-wp-rest-routes.json (the route index served at
+  https://www.mobia.com/wp-json/) plus observed response headers
+note: >-
+  Every convention below was read from the route descriptors this host actually serves or
+  from headers actually observed on a live response. The provider publishes no API
+  documentation, so nothing here is taken from prose and nothing is assumed.
+api: Mobia Medical Site REST API (WordPress)
+auth_style: >-
+  Anonymous read on public collections; WordPress cookie + X-WP-Nonce or Application
+  Password for writes; OAuth 2.0 authorization_code + PKCE (scope `mcp`) for the MCP
+  endpoint. See authentication/microtransponder-authentication.yml.
+versioning:
+  style: namespace-in-path
+  current: wp/v2
+  namespaces_served: 22
+  route_count: 320
+  evidence: https://www.mobia.com/wp-json/ namespaces[]
+  policy_published: false
+pagination:
+  style: page-number
+  params:
+  - name: page
+    type: integer
+    default: 1
+    minimum: 1
+  - name: per_page
+    type: integer
+    default: 10
+    minimum: 1
+    maximum: 100
+  - name: offset
+    type: integer
+  response_headers:
+  - X-WP-Total
+  - X-WP-TotalPages
+  link_header: 'Link: <...page=2>; rel="next"'
+  evidence: >-
+    GET https://www.mobia.com/wp-json/wp/v2/news?per_page=2&page=1 returned
+    x-wp-total: 70, x-wp-totalpages: 35 and a Link rel="next"
+sparse_fields:
+  supported: true
+  param: _fields
+  note: WordPress core `_fields` query parameter; supported on every wp/v2 collection.
+embedding:
+  supported: true
+  param: _embed
+  note: HAL-style _links plus optional _embedded expansion.
+filtering:
+  params:
+  - search
+  - search_columns
+  - include
+  - exclude
+  - slug
+  - status
+  - after
+  - before
+  - modified_after
+  - modified_before
+  - order
+  - orderby
+metadata:
+  supported: true
+  field: meta
+request_id_tracing:
+  supported: false
+  observed_headers:
+  - x-styx-req-id
+  note: >-
+    x-styx-req-id is a Pantheon platform request id present on responses. It is not a
+    documented client-facing trace identifier and there is no documented correlation
+    header the caller can set.
+error_envelope:
+  format: wordpress-rest
+  rfc9457: false
+  shape: '{"code": "<string>", "message": "<string>", "data": {"status": <int>}}'
+  see: errors/microtransponder-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After headers were present on any observed
+    response. See rate-limits/microtransponder-rate-limits.yml.
+idempotency:
+  supported: false
+  grade: na
+  note: >-
+    No Idempotency-Key header, no idempotent-retry semantics, and no documentation of
+    either. WordPress core does not implement one. No `Idempotency` pointer is emitted.
+dry_run_mode:
+  supported: false
+  grade: na
+  note: No dry-run / preview / validate-only mode on any served route.
+reversibility:
+  grade: documented
+  applies: true
+  note: >-
+    The write surface is the WordPress content API. Its one reversal path is the Trash:
+    DELETE without `force` soft-deletes, and the item can be restored by setting `status`
+    back. This is read from the route descriptor the host itself serves, NOT from a
+    provider policy page — the provider publishes none. No retention window is stated
+    anywhere by the provider, so this grades `documented`, not `verified`.
+  surfaces:
+  - write_operation: DELETE /wp/v2/{post,pages,media,news,team,blocks}/{id}
+    reversal: >-
+      Omit `force` (default false) — the item goes to Trash instead of being deleted.
+      Restore with POST/PUT/PATCH on the same id setting `status` to `publish` or `draft`.
+    window: null
+    window_source: null
+    window_note: >-
+      NOT STATED by the provider. WordPress' default trash-emptying interval is a
+      site-configuration value (EMPTY_TRASH_DAYS) that this host does not publish, so no
+      window is asserted here.
+    evidence: >-
+      discovery/microtransponder-wp-rest-routes.json — DELETE arg `force`
+      {"type":"boolean","default":false,"description":"Whether to bypass Trash and force
+      deletion."}; PUT arg `status` enum [publish, future, draft, pending, private]
+  - write_operation: DELETE /wp/v2/{...}/{id}?force=true
+    reversal: none
+    window: null
+    window_note: Permanent — `force=true` bypasses Trash. There is no undo.
+  - write_operation: POST /wp-abilities/v1/abilities/{name}/run
+    reversal: unknown
+    window: null
+    window_note: >-
+      The ability set is not readable anonymously, so the consequence and reversibility of
+      each ability cannot be established. Nothing is asserted.
+cross_links:
+  errors: errors/microtransponder-problem-types.yml
+  lifecycle: lifecycle/microtransponder-lifecycle.yml
+  authentication: authentication/microtransponder-authentication.yml
+  rate_limits: rate-limits/microtransponder-rate-limits.yml
+  data_model: data-model/microtransponder-data-model.yml

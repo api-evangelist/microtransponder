@@ -1,0 +1,87 @@
+generated: '2026-08-26'
+method: probed
+source: live HTTP probes of every host in apis.yml (www.mobia.com, www.vivistim.com, ir.mobia.com)
+note: >-
+  www.mobia.com serves two real /.well-known documents — RFC 8414 OAuth 2.0 Authorization
+  Server Metadata and RFC 9728 OAuth 2.0 Protected Resource Metadata — both emitted by the
+  WordPress MCP OAuth plugin behind the corporate site. Everything else 404s on that host,
+  which returns a genuine 404 status for unknown paths (control probe confirmed).
+  www.vivistim.com is a catch-all: it answers HTTP 200 with the same 220,143-byte
+  "Error code: 404 - Vivistim" HTML shell for EVERY path, including a nonsense control
+  path, so none of its 200s are documents and none are counted here.
+hit_count: 2
+hosts:
+- host: https://www.mobia.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: microtransponder-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    file: microtransponder-oauth-protected-resource.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/this-should-404-abcxyz
+    status: 404
+    note: soft_404_control — host returns a true 404, so its 404s above are real absences
+- host: https://www.vivistim.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: >-
+      NOT a document — 220,143-byte HTML shell titled "Error code: 404 - Vivistim".
+      Same body returned for the control path; treated as a miss.
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: soft-404 HTML shell, not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: soft-404 HTML shell, not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    note: soft-404 HTML shell, not a document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: soft-404 HTML shell, not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: soft-404 HTML shell, not a document
+  - path: /.well-known/agent.json
+    status: 200
+    note: soft-404 HTML shell, not a document
+  - path: /.well-known/this-should-404-abcxyz
+    status: 200
+    note: >-
+      soft_404_control — identical 220,143-byte body proves this host is a catch-all;
+      no /.well-known document on www.vivistim.com is counted.
+- host: https://ir.mobia.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+    note: >-
+      ir.mobia.com is the Q4-hosted investor-relations site; it answers 403 to a plain
+      crawler on some paths and 200 to a full browser User-Agent. No card was served.

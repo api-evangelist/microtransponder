@@ -1,0 +1,93 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  https://www.mobia.com/.well-known/oauth-authorization-server ,
+  https://www.mobia.com/.well-known/oauth-protected-resource ,
+  https://www.mobia.com/wp-json/ , https://www.mobia.com/compliance/
+note: >-
+  Only standards the served artifacts themselves declare or demonstrate are marked
+  conforming. Nothing is claimed from marketing prose. There is no domain standard for
+  implantable neurostimulation device data that this company's contract declares — the
+  contract in question is a website CMS API — so no domain_standard_conformance is
+  asserted. Absence there is not a penalty.
+standards:
+- id: oauth2
+  name: OAuth 2.0 (RFC 6749)
+  conforms: true
+  evidence: >-
+    authorization_code + refresh_token grants, code response type, and
+    authorize/token/revoke endpoints declared at
+    https://www.mobia.com/.well-known/oauth-authorization-server (HTTP 200)
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: >-
+    /.well-known/oauth-authorization-server served with issuer, authorization_endpoint,
+    token_endpoint, revocation_endpoint, response_types_supported, grant_types_supported,
+    code_challenge_methods_supported, scopes_supported (HTTP 200, application/json)
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: >-
+    /.well-known/oauth-protected-resource served with resource,
+    authorization_servers[], bearer_methods_supported, scopes_supported (HTTP 200)
+- id: rfc7636
+  name: PKCE
+  conforms: true
+  evidence: code_challenge_methods_supported ["S256"]
+- id: mcp
+  name: Model Context Protocol
+  conforms: partial
+  evidence: >-
+    Two JSON-RPC MCP endpoints served under /wp-json/mcp/. Both returned HTTP 401 to an
+    anonymous tools/list, so the protocol version and the tool schemas could not be
+    verified. Presence verified, conformance not.
+- id: rfc8615
+  name: Well-Known URIs
+  conforms: true
+  evidence: two documents served under /.well-known/ on www.mobia.com
+- id: oidc
+  name: OpenID Connect Discovery
+  conforms: false
+  evidence: https://www.mobia.com/.well-known/openid-configuration -> 404
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    Error bodies use the WordPress {code,message,data.status} envelope, not
+    application/problem+json — see errors/microtransponder-problem-types.yml
+- id: rfc9116
+  name: security.txt
+  conforms: false
+  evidence: https://www.mobia.com/.well-known/security.txt -> 404
+- id: api-catalog
+  name: RFC 9727 api-catalog
+  conforms: false
+  evidence: https://www.mobia.com/.well-known/api-catalog -> 404
+- id: pagination
+  name: Page-number pagination with count headers
+  conforms: true
+  evidence: >-
+    page/per_page/offset params plus X-WP-Total, X-WP-TotalPages and RFC 8288 Link
+    rel="next" observed on GET /wp-json/wp/v2/news
+- id: idempotency
+  name: Idempotency-Key
+  conforms: false
+  evidence: no idempotency header or semantics on any served route
+compliance_programs:
+- name: Comprehensive Compliance Program (CCP)
+  url: https://www.mobia.com/compliance/
+  status: 200
+  basis:
+  - U.S. HHS Office of Inspector General, Compliance Program Guidance for Pharmaceutical Manufacturers
+  - PhRMA Code on Interactions with Health Care Professionals
+  - California Health & Safety Code sections 119400-119402
+  - California S.B. 1765
+  note: >-
+    A corporate healthcare-marketing compliance program published by the company. It is
+    not an information-security certification — no SOC 2, ISO 27001, HIPAA attestation or
+    FedRAMP authorization is published anywhere on the company's sites.
+  reporting:
+    anonymous: https://mobia.allvoices.co/
+    hotline: '888-718-7073'
+certifications: []

@@ -1,0 +1,35 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  npm registry search, PyPI, GitHub org + repository search, and the company's own sites
+note: >-
+  No first-party client library exists in any public registry, and the company operates no
+  public source repositories. Every registry below was queried unauthenticated and
+  returned zero results. This is a checked absence, not an unchecked field.
+package_count: 0
+packages: []
+official_sdk_count: 0
+registries_probed:
+- registry: npm
+  query: https://registry.npmjs.org/-/v1/search?text=microtransponder
+  results: 0
+- registry: npm
+  query: https://registry.npmjs.org/-/v1/search?text=vivistim
+  results: 0
+- registry: pypi
+  query: https://pypi.org/pypi/vivistim/json
+  status: 404
+- registry: github
+  query: https://api.github.com/orgs/microtransponder
+  status: 404
+- registry: github
+  query: https://api.github.com/orgs/mobiamedical
+  status: 404
+- registry: github
+  query: https://api.github.com/orgs/mobia
+  status: 404
+- registry: github
+  query: https://api.github.com/search/repositories?q=vivistim
+  results: 0
+note_no_sdks_pointer: >-
+  No `SDKs` pointer is emitted in apis.yml because no official client library was found.

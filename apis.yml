@@ -1,23 +1,125 @@
 aid: microtransponder
 name: MicroTransponder
-description: 'MicroTransponder is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  MicroTransponder, Inc. — renamed Mobia Medical, Inc. on 2026-02-24 — is a privately
+  founded, Austin/Dallas Texas medical device company that develops the FDA-approved
+  Vivistim Paired VNS System, an implantable vagus nerve stimulation device paired with
+  rehabilitation therapy to reduce upper-extremity motor deficits in chronic ischemic
+  stroke survivors. The company is a medical device manufacturer, not a software vendor:
+  it publishes no developer portal, no product API, no SDKs and no public source
+  repositories. The only machine-readable surface API Evangelist could reach on hosts the
+  company controls is the WordPress REST API behind its corporate site (www.mobia.com) and
+  its product site (www.vivistim.com), plus an OAuth-protected Model Context Protocol
+  endpoint the corporate site serves via the WordPress MCP Adapter, with RFC 8414 and
+  RFC 9728 discovery documents. This profile records that surface and nothing more.
 url: https://raw.githubusercontent.com/api-evangelist/microtransponder/refs/heads/main/apis.yml
+image: https://www.mobia.com/wp-content/uploads/2026/04/mobia-social-image.jpg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-former-name: MicroTransponder, Inc.
+x-current-name: Mobia Medical, Inc.
 specificationVersion: '0.20'
 created: '2026-08-25'
-modified: '2026-08-25'
+modified: '2026-08-26'
 tags:
 - Company
-apis: []
+- Medical Devices
+- Health Care
+- Neurotechnology
+- Neuromodulation
+- Stroke Rehabilitation
+- Implantable Devices
+- Life Sciences
+- WordPress
+- Model Context Protocol
+apis:
+- name: Mobia Medical Site REST API (WordPress)
+  description: >-
+    The WordPress REST API served by the Mobia Medical corporate site at
+    https://www.mobia.com/wp-json/. It is the content-management API behind the marketing
+    site — 320 routes across 22 namespaces including wp/v2 (posts, pages, media, news,
+    team), wp-abilities/v1 and an mcp namespace — not a Vivistim product or device API.
+    Anonymous reads are open; writes and the MCP endpoints require authentication.
+  humanURL: https://www.mobia.com/wp-json/
+  baseURL: https://www.mobia.com/wp-json/
+  tags:
+  - Content Management
+  - WordPress
+  - REST
+  properties:
+  - type: APIDiscovery
+    url: discovery/microtransponder-wp-rest-routes.json
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/microtransponder-domain-security.yml
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://www.mobia.com/
+- type: ProductSite
+  url: https://www.vivistim.com/
+- type: Support
+  url: https://www.mobia.com/contact-us/
+- type: Blog
+  url: https://ir.mobia.com/news-events/press-releases/
+- type: BlogRSS
+  url: https://www.mobia.com/feed/
+- type: PrivacyPolicy
+  url: https://www.mobia.com/privacy-policy/
+- type: Compliance
+  url: https://www.mobia.com/compliance/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/microtransponder
+- type: WellKnown
+  url: well-known/microtransponder-well-known.yml
+- type: MCPServer
+  url: mcp/microtransponder-mcp.yml
+- type: Authentication
+  url: authentication/microtransponder-authentication.yml
+- type: OAuthScopes
+  url: scopes/microtransponder-scopes.yml
+- type: ErrorCatalog
+  url: errors/microtransponder-problem-types.yml
+- type: Conventions
+  url: conventions/microtransponder-conventions.yml
+- type: DataModel
+  url: data-model/microtransponder-data-model.yml
+- type: Lifecycle
+  url: lifecycle/microtransponder-lifecycle.yml
+- type: Conformance
+  url: conformance/microtransponder-conformance.yml
+- type: RateLimits
+  url: rate-limits/microtransponder-rate-limits.yml
+- type: Plans
+  url: plans/microtransponder-plans-pricing.yml
+- type: Packages
+  url: packages/microtransponder-packages.yml
+- type: LLMsTxt
+  url: llms/microtransponder-llms.txt
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: no-developer-program
+  detail: >-
+    MicroTransponder (renamed Mobia Medical on 2026-02-24) is an implantable medical device
+    maker with no developer program — every contract-discovery path missed on every host —
+    but its corporate WordPress site does serve two real /.well-known OAuth documents and
+    two live, OAuth-gated Model Context Protocol endpoints, which is what this profile
+    records.
+  evidence:
+  - url: https://www.mobia.com/.well-known/oauth-authorization-server
+    status: 200
+  - url: https://www.mobia.com/wp-json/mcp/mcp-oauth-server
+    status: 401
+  - url: https://www.mobia.com/openapi.json
+    status: 404
+  - url: https://api.github.com/orgs/microtransponder
+    status: 404
+  checked: '2026-08-26'

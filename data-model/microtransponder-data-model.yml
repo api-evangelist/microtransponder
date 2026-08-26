@@ -1,0 +1,109 @@
+generated: '2026-08-26'
+method: derived
+source: discovery/microtransponder-wp-rest-routes.json
+note: >-
+  Derived mechanically from the 320 route descriptors served at
+  https://www.mobia.com/wp-json/. Only the content entities in the wp/v2 namespace are
+  modelled — plugin namespaces (yoast, redirection, wordfence, spectra, astra,
+  simple-history) are site tooling, not a content model, and are listed but not expanded.
+  There is no provider object reference to enrich this with.
+api: Mobia Medical Site REST API (WordPress)
+namespaces:
+  content: wp/v2
+  agent: [mcp, wp-abilities/v1]
+  site_tooling: [yoast/v1, redirection/v1, simple-history/v1, wordfence/v1, wordfence-login-security/v1,
+    spectra/v1, uag/v1, uagpro_dc/v1, astra/v1, astra-addon/v1, bsf-core/v1, one-onboarding/v1,
+    zipwp-images/v1, nps-survey/v1, cya11y/v1, simple-page-ordering/v1, oembed/1.0,
+    wp-site-health/v1, wp-block-editor/v1]
+entities:
+- name: post
+  path: /wp/v2/posts
+  id: integer
+  note: Core blog post type.
+- name: news
+  path: /wp/v2/news
+  id: integer
+  note: >-
+    Custom post type carrying the company's press releases; 70 items at probe time
+    (x-wp-total). This is the company-specific content entity on this site.
+- name: news-type
+  path: /wp/v2/news-type
+  id: integer
+  note: Taxonomy classifying `news` items.
+- name: team
+  path: /wp/v2/team
+  id: integer
+  note: Custom post type behind the leadership-team page.
+- name: team_type
+  path: /wp/v2/team_type
+  id: integer
+  note: Taxonomy classifying `team` items.
+- name: page
+  path: /wp/v2/pages
+  id: integer
+- name: media
+  path: /wp/v2/media
+  id: integer
+- name: category
+  path: /wp/v2/categories
+  id: integer
+- name: tag
+  path: /wp/v2/tags
+  id: integer
+- name: user
+  path: /wp/v2/users
+  id: integer
+- name: comment
+  path: /wp/v2/comments
+  id: integer
+- name: taxonomy
+  path: /wp/v2/taxonomies
+  id: slug
+- name: type
+  path: /wp/v2/types
+  id: slug
+relationships:
+- from: news
+  to: news-type
+  kind: has_many
+  via: news-type
+- from: team
+  to: team_type
+  kind: has_many
+  via: team_type
+- from: post
+  to: category
+  kind: has_many
+  via: categories
+- from: post
+  to: tag
+  kind: has_many
+  via: tags
+- from: post
+  to: user
+  kind: belongs_to
+  via: author
+- from: post
+  to: media
+  kind: has_one
+  via: featured_media
+- from: page
+  to: media
+  kind: has_one
+  via: featured_media
+- from: media
+  to: post
+  kind: belongs_to
+  via: post
+- from: comment
+  to: post
+  kind: belongs_to
+  via: post
+- from: comment
+  to: user
+  kind: belongs_to
+  via: author
+id_scheme:
+  style: opaque-integer
+  prefixes: []
+  note: WordPress integer primary keys; no typed id prefixes.

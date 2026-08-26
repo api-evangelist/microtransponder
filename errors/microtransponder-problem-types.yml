@@ -1,0 +1,39 @@
+generated: '2026-08-26'
+method: probed
+source: live responses observed from https://www.mobia.com/wp-json/
+note: >-
+  There is no OpenAPI to derive from and the provider publishes no error reference. Every
+  entry below is an error body this host actually returned during the enrichment probe,
+  recorded verbatim. Nothing is extrapolated from the WordPress error registry at large.
+format: wordpress-rest
+rfc9457: false
+envelope:
+  shape: '{"code": "<machine slug>", "message": "<human string>", "data": {"status": <http status>}}'
+  content_type: application/json; charset=UTF-8
+  note: >-
+    The JSON body carries its own `data.status` which mirrors the HTTP status. Not
+    application/problem+json — no `type`, `title`, `detail` or `instance` members.
+observed_count: 2
+problem_types:
+- code: rest_forbidden
+  http_status: 401
+  message: Sorry, you are not allowed to do that.
+  observed_at: POST https://www.mobia.com/wp-json/mcp/mcp-adapter-default-server
+  cause: >-
+    Unauthenticated (or under-privileged) request to a route requiring a WordPress
+    capability.
+  remediation: >-
+    Authenticate with a WordPress login cookie plus X-WP-Nonce, or an Application Password
+    over HTTP Basic, on an account holding the required capability.
+- code: mcp_unauthorized
+  http_status: 401
+  message: MCP authentication required.
+  observed_at: POST https://www.mobia.com/wp-json/mcp/mcp-oauth-server
+  cause: No bearer token presented to the OAuth-protected MCP endpoint.
+  remediation: >-
+    Complete the authorization_code + PKCE flow advertised at
+    https://www.mobia.com/.well-known/oauth-authorization-server and present the resulting
+    token with scope `mcp` in the Authorization header.
+not_observed_note: >-
+  404 responses on this host are served as HTML by the site theme, not as a REST error
+  envelope; only /wp-json/* paths return the JSON envelope above.

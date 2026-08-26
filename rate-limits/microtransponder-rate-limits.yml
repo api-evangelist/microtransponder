@@ -1,0 +1,32 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  observed response headers on https://www.mobia.com/wp-json/wp/v2/news and
+  https://www.mobia.com/wp-json/ ; no rate-limit documentation exists to search
+note: >-
+  The provider publishes no developer documentation, therefore no published limits exist
+  to record. The live responses carry no rate-limit signal of any kind. This is an honest
+  zero, not an unchecked field.
+api: Mobia Medical Site REST API (WordPress)
+limit_count: 0
+limits: []
+response_headers:
+  ratelimit_standard: []
+  x_ratelimit: []
+  retry_after: false
+  observed_headers:
+  - cache-control
+  - link
+  - x-wp-total
+  - x-wp-totalpages
+  - x-content-type-options
+  - strict-transport-security
+  - x-robots-tag
+  - via
+  - x-cache
+exhaustion_status: null
+edge_note: >-
+  The site is served through Pantheon + Varnish + Fastly (via, x-cache, x-served-by
+  headers). Any throttling is an edge policy the provider does not describe and does not
+  signal to the caller.
+docs: null
