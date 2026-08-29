@@ -13,6 +13,17 @@ description: >-
   endpoint the corporate site serves via the WordPress MCP Adapter, with RFC 8414 and
   RFC 9728 discovery documents. This profile records that surface and nothing more.
 url: https://raw.githubusercontent.com/api-evangelist/microtransponder/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.mobia.com/wp-content/uploads/2026/04/mobia-social-image.jpg
 x-type: company
 x-source: harvest:secondary-market
