@@ -70,22 +70,20 @@ tags_raw:
 - WordPress
 - Model Context Protocol
 apis:
-- name: Mobia Medical Site REST API (WordPress)
-  description: >-
-    The WordPress REST API served by the Mobia Medical corporate site at
-    https://www.mobia.com/wp-json/. It is the content-management API behind the marketing
-    site — 320 routes across 22 namespaces including wp/v2 (posts, pages, media, news,
-    team), wp-abilities/v1 and an mcp namespace — not a Vivistim product or device API.
-    Anonymous reads are open; writes and the MCP endpoints require authentication.
-  humanURL: https://www.mobia.com/wp-json/
-  baseURL: https://www.mobia.com/wp-json/
+- aid: microtransponder:mobia-com-website-wordpress-rest
+  name: MicroTransponder Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the MicroTransponder website at www.mobia.com:
+    the route index of the site''s content management system, catalogued as one site surface rather than
+    as separate APIs.'
+  baseURL: https://www.mobia.com/wp-json
   tags:
-  - Content Management
   - WordPress
-  - REST
+  x-surface: platform-generated
   properties:
-  - type: APIDiscovery
-    url: discovery/microtransponder-wp-rest-routes.json
+  - type: Documentation
+    url: https://www.mobia.com/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
