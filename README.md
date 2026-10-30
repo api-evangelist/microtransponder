@@ -64,14 +64,114 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-MicroTransponder, Inc. was renamed **Mobia Medical, Inc.** on 2026-02-24. It is a medical device
-company that develops the FDA-approved Vivistim Paired VNS System — an implantable vagus nerve
-stimulator paired with rehabilitation therapy to reduce upper-extremity motor deficits in chronic
-ischemic stroke survivors. It runs no developer program: no developer portal, no API documentation,
-no OpenAPI/GraphQL/gRPC/WSDL contract, no SDKs and no public source repositories. The one
-machine-readable surface on hosts it controls is the WordPress REST API behind its corporate site,
-plus an OAuth-protected Model Context Protocol endpoint the same site serves.
+MicroTransponder, Inc. — renamed Mobia Medical, Inc. on 2026-02-24 — is a privately founded, Austin/Dallas Texas medical device company that develops the FDA-approved Vivistim Paired VNS System, an implantable vagus nerve stimulation device paired with rehabilitation therapy to reduce upper-extremity motor deficits in chronic ischemic stroke survivors. The company is a medical device manufacturer, not a software vendor: it publishes no developer portal, no product API, no SDKs and no public source repositories. The only machine-readable surface API Evangelist could reach on hosts the company controls is the WordPress REST API behind its corporate site (www.mobia.com) and its product site (www.vivistim.com), plus an OAuth-protected Model Context Protocol endpoint the corporate site serves via the WordPress MCP Adapter, with RFC 8414 and RFC 9728 discovery documents. This profile records that surface and nothing more.
 
-- https://www.mobia.com/
-- https://www.vivistim.com/
-- https://ir.mobia.com/news-events/press-releases/
+**Areas:** Company · Medical Devices · Healthcare · Neurotechnology · Neuromodulation · Stroke Rehabilitation · Implantable Devices · Life Sciences · WordPress · MCP
+
+## MicroTransponder on APIs.io
+
+Everything profiled for MicroTransponder is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/microtransponder/](https://apis.io/providers/microtransponder/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [MicroTransponder Website (WordPress REST)](https://apis.io/apis/microtransponder/mobia-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the MicroTransponder website at www.mobia.com: the route index of the site's content management system,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [mcp-oauth-server](https://apis.io/servers/microtransponder/mcp-oauth-server/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Microtransponder Authentication](https://apis.io/security/microtransponder/microtransponder-authentication/)
+- [Microtransponder Domain Security](https://apis.io/security/microtransponder/microtransponder-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Microtransponder Scopes](https://apis.io/scopes/microtransponder/microtransponder-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Microtransponder Plans Pricing](https://apis.io/plans/microtransponder/microtransponder-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Microtransponder Rate Limits](https://apis.io/rate-limits/microtransponder/microtransponder-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.mobia.com/)
+- [Support](https://www.mobia.com/contact-us/)
+- [Blog](https://ir.mobia.com/news-events/press-releases/)
+- [Compliance](https://www.mobia.com/compliance/)
+- [Privacy policy](https://www.mobia.com/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 20.6** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 60.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 27.4 |
+| Access clarity | 18.4 |
+
+**Agent readiness 21.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 33.6** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/microtransponder/](https://apis.io/providers/microtransponder/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for MicroTransponder: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/microtransponder/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
